@@ -10,4 +10,4 @@ def hello():
     return "I'm alive."
 
 if __name__ == '__main__':
-    application.run()
+    application.run(port=8080)
