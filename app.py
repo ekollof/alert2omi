@@ -12,7 +12,7 @@ application = Flask(__name__)
 def hello():
     return "I'm alive."
 
-@application.route("/webhook")
+@application.route("/webhook", methods['POST'])
 def webhook():
     if request.method == 'POST':
         print(request.json)
