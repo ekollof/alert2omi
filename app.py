@@ -15,7 +15,16 @@ def hello():
 @application.route("/webhook", methods=['POST'])
 def webhook():
     if request.method == 'POST':
-        print(request.json)
+        alert = requests.json()
+        omi = render_template('template.xml', 
+                              title='alert',
+                              description=alert['commonAnnotation'],
+                              severity=alert['status'],
+                              node=alert['commonLabels']
+                              category='undefined',
+                              
+                            )
+        
         return '', 200
     else:
         abort(400)        
