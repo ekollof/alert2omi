@@ -7,6 +7,7 @@ import requests
 from flask import Flask, request, render_template, abort
 
 application = Flask(__name__)
+postUrl = "https://lsrv5777.linux.rabobank.nl:30005/bsmc/rest/events/omi"
 
 @application.route("/")
 def hello():
@@ -20,10 +21,19 @@ def webhook():
                               title='alert',
                               description=alert['commonAnnotation'],
                               severity=alert['status'],
-                              node=alert['commonLabels']
+                              node=alert['commonLabels'],
                               category='undefined',
-                              
+			      affectedCI='undefined'
                             )
+       
+	print("Incoming JSON: %s\n" % alert)
+	print("Outgoing XML: %s\n" % omi)
+
+	headers = {
+		'Content-type': 'text/xml',
+	}
+
+	response = requests.post(postUrl, headers, omi)
         
         return '', 200
     else:
