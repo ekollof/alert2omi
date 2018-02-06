@@ -7,7 +7,7 @@ import requests
 from flask import Flask, request, render_template, abort
 
 application = Flask(__name__)
-postUrl = "https://lsrv5777.linux.rabobank.nl:30005/bsmc/rest/events/omi"
+postUrl = ""
 
 @application.route("/")
 def hello():
