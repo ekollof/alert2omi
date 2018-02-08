@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+from future import standard_library
+
+standard_library.install_aliases()
 import configparser
 import sys
 
@@ -26,7 +30,10 @@ def hello():
 @application.route("/webhook", methods=['POST'])
 def webhook():
     if request.method == 'POST':
+
         alert = request.json
+        print("Incoming JSON: %s\n" % alert)
+
         omi = render_template('template.xml',
                               title='alert',
                               description=alert['commonAnnotation'],
@@ -36,7 +43,6 @@ def webhook():
                               affectedCI='undefined'
                               )
 
-        print("Incoming JSON: %s\n" % alert)
         print("Outgoing XML: %s\n" % omi)
 
         headers = {
