@@ -26,7 +26,7 @@ def hello():
 @application.route("/webhook", methods=['POST'])
 def webhook():
     if request.method == 'POST':
-        alert = requests.json()
+        alert = request.json()
         omi = render_template('template.xml',
                               title='alert',
                               description=alert['commonAnnotation'],
