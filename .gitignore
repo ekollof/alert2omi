@@ -3,3 +3,5 @@ lib
 local
 share
 pip-selfcheck.json
+include
+.idea
